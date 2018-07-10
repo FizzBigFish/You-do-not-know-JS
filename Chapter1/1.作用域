@@ -1,0 +1,7 @@
+* 词法分析
+* 语法分析
+* 代码生成
+
+> LHS RHS
+LHS ：查找的目的是对变量进行赋值 （严格模式，找不到，引擎抛出ReferenceError）
+RHS : 目的是获取变量的值 （找不到，引擎抛出ReferenceError）
