@@ -1,0 +1,7 @@
+* 词法阶段
+    作用域查找会在找到第一个匹配的标识符时停止，同名标识符存在遮蔽效应
+* 欺骗词法
+    欺骗词法作用域会导致性能下降
+    > eval  setTimeout setInterval 第一个参数可以是字符串  new　Function（）
+    > with 
+   
