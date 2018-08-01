@@ -56,5 +56,35 @@
     c.这个新对象会绑定到函数调用的this
     d.若这个函数没有返回其它对象，那么new表达式中的函数调用会自动返回这个新对象
 
-    *  优先级
+*  优先级
+     new 显式绑定  隐式绑定 默认绑定 
+
+* 绑定例外
+   a. 被忽略的this : 如果把null undefined 作为this的绑定对象传入call apply bind 这些值在调用时会被忽略，实际应用的是默认绑定规则。
+```
+        function foo(){
+            console.log(this.a)
+        }
+        var a = 3
+        foo.call( null);
+```
+    这种使用null来忽略this 绑定可能会产生副作用。例如某个函数确实使用了this，那么默认绑定会把this绑定到全局对象。
+    更安全的做法是传入一个特殊的对象，即Object.create(null)，这个和{}很像，但是不会创建Object.prototype这个委托，所以比{}更空
+    b. 间接引用 ：这种情况下应用默认绑定规则。
+        间接引用最容易在赋值时发生：
+```
+        function foo() {
+            console.log(this.a)
+        }
+        var a = 2;
+        var o = {
+            a:3,
+            foo:foo
+        }
+        var p = {
+            a:4
+        }
+        o.foo();//3
+        (p.foo = o.foo)();//2
+```
     
