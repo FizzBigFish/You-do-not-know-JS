@@ -86,5 +86,24 @@
         }
         o.foo();//3
         (p.foo = o.foo)();//2
+
 ```
+    c. 软绑定：硬绑定可以防止函数调用应用默认绑定规则，但是降低了函数的灵活性，使用硬绑定就无法使用隐式绑定或者显式绑定来修改this
+    ```
+    if(!Function.prototype.softBind){
+        Function.prototype.softBind = function (obj) {
+            var fn = this;
+            var curried = [].slice.call( arguments, 1 );
+            var bound = function (){
+                return fn.apply(
+                    (!this || this === (window || global))? obj : this,curried.concat.apply( curried, arguments)
+                );
+            };
+            bound.prototype = Object.create(fn.prototype);
+            return bound;
+        }
+
+    }
+
+
     
